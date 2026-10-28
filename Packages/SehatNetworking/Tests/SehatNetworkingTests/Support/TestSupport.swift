@@ -83,3 +83,31 @@ struct TransportStub: HTTPTransport {
         try await handler(request)
     }
 }
+
+/// Yields until `condition` holds. Uses no wall-clock time; the iteration
+/// bound only protects against a hang when the condition can never be met.
+func eventually(
+    _ condition: @Sendable () async -> Bool,
+    file: StaticString = #filePath,
+    line: UInt = #line
+) async {
+    for _ in 0..<100_000 {
+        if await condition() { return }
+        await Task.yield()
+    }
+    XCTFail("Condition was not met", file: file, line: line)
+}
+
+func assertFailure(
+    _ result: Result<HTTPResponse, Error>,
+    equals expected: AppError,
+    file: StaticString = #filePath,
+    line: UInt = #line
+) {
+    switch result {
+    case .success:
+        XCTFail("Expected \(expected) but got success", file: file, line: line)
+    case .failure(let error):
+        XCTAssertEqual(error as? AppError, expected, file: file, line: line)
+    }
+}
