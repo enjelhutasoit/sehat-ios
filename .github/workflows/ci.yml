@@ -8,10 +8,14 @@ on:
 jobs:
   package-tests:
     runs-on: macos-15
+    strategy:
+      fail-fast: false
+      matrix:
+        package: [SehatCore, SehatNetworking]
     steps:
       - uses: actions/checkout@v4
       - name: Swift version
         run: swift --version
-      - name: Test SehatCore
-        working-directory: Packages/SehatCore
+      - name: Test ${{ matrix.package }}
+        working-directory: Packages/${{ matrix.package }}
         run: swift test --enable-code-coverage
