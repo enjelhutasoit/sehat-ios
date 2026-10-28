@@ -12,7 +12,7 @@ import SehatDomain
 ///
 /// Contract: throws `AppError` only. No ordering is guaranteed on reads;
 /// ordering is a domain rule (see `GetConsultationOverviewUseCase`).
-public actor ConsultationStore: ModelActor, ConsultationRepository {
+public actor ConsultationStore: ModelActor, ConsultationRepository, ConsultationWriting {
     public nonisolated let modelContainer: ModelContainer
     public nonisolated let modelExecutor: any ModelExecutor
     private let errorMapper: any ErrorMapping

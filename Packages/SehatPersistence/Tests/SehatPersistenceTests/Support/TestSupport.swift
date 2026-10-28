@@ -3,7 +3,10 @@
 //
 
 import Foundation
+import SehatCore
 import SehatDomain
+import SehatPersistence
+import XCTest
 
 func makeUUID(_ number: Int) -> UUID {
     let suffix = String(format: "%012d", number)
@@ -28,4 +31,32 @@ func makeConsultation(
         status: status,
         scheduledAt: Date(timeIntervalSince1970: seconds)
     )
+}
+
+func makeEntry(
+    id: Int,
+    entityID: Int = 900,
+    kind: String = "consultation.cancel",
+    payload: String = "{}"
+) -> OutboxEntry {
+    OutboxEntry(
+        id: makeUUID(id),
+        entityID: makeUUID(entityID),
+        kind: kind,
+        payload: Data(payload.utf8)
+    )
+}
+
+func assertThrowsAppError(
+    _ expected: AppError,
+    file: StaticString = #filePath,
+    line: UInt = #line,
+    _ operation: () async throws -> Void
+) async {
+    do {
+        try await operation()
+        XCTFail("Expected \(expected) but operation succeeded", file: file, line: line)
+    } catch {
+        XCTAssertEqual(error as? AppError, expected, file: file, line: line)
+    }
 }

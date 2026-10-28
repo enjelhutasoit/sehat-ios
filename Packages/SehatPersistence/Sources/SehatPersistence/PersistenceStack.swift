@@ -11,7 +11,7 @@ public enum PersistenceStack {
     ///
     /// CloudKit is explicitly off: health data must not sync to iCloud by accident.
     public static func makeContainer(inMemory: Bool = false) throws -> ModelContainer {
-        let schema = Schema([ConsultationRecord.self])
+        let schema = Schema([ConsultationRecord.self, OutboxRecord.self])
         let configuration = ModelConfiguration(
             schema: schema,
             isStoredInMemoryOnly: inMemory,
