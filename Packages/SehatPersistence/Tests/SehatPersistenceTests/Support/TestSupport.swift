@@ -60,3 +60,18 @@ func assertThrowsAppError(
         XCTAssertEqual(error as? AppError, expected, file: file, line: line)
     }
 }
+
+func makeAppointment(
+    id: Int = 1,
+    doctorName: String = "Dr. Example",
+    status: Appointment.Status = .pending,
+    at seconds: TimeInterval = 1_000
+) -> Appointment {
+    Appointment(
+        id: makeUUID(id),
+        doctorName: doctorName,
+        specialty: "General",
+        startsAt: Date(timeIntervalSince1970: seconds),
+        status: status
+    )
+}

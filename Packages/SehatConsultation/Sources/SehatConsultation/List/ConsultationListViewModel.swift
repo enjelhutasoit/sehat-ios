@@ -3,6 +3,7 @@
 //
 
 import Observation
+import SehatCore
 import SehatDomain
 
 @MainActor

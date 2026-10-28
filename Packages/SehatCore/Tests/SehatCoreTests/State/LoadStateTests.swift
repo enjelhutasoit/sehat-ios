@@ -5,8 +5,6 @@
 import SehatCore
 import XCTest
 
-@testable import SehatConsultation
-
 final class LoadStateTests: XCTestCase {
     private typealias State = LoadState<Int>
 

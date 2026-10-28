@@ -80,6 +80,37 @@ final class SchemaMigrationTests: XCTestCase {
 
         XCTAssertEqual(Set(reopened), Set(expectedConsultations))
     }
+    
+    // MARK: - V2 to V3
+
+    func test_migrationFromV2_preservesConsultationsOutboxAndServerVersion() async throws {
+        let url = try makeStoreURL()
+        try writeV2Store(at: url)
+        let container = try PersistenceStack.makeContainer(storeURL: url)
+
+        let records = try ModelContext(container).fetch(FetchDescriptor<ConsultationRecord>())
+        let consultations = try await ConsultationStore(modelContainer: container).consultations()
+        let pending = try await OutboxStore(modelContainer: container).pending()
+
+        XCTAssertEqual(records.map(\.serverVersion), [4])
+        XCTAssertEqual(consultations, [makeConsultation(id: 1, doctorName: "Dr. V2", at: 700)])
+        XCTAssertEqual(pending, [makeEntry(id: 1, entityID: 1, kind: "consultation.cancel", payload: "v2")])
+    }
+
+    func test_migrationFromV2_allowsBookingAppointments_afterExistingOutboxEntries() async throws {
+        let url = try makeStoreURL()
+        try writeV2Store(at: url)
+        let container = try PersistenceStack.makeContainer(storeURL: url)
+        let store = AppointmentStore(modelContainer: container)
+        let appointment = makeAppointment(id: 50)
+
+        try await store.book(appointment)
+        let stored = try await store.appointments()
+        let pending = try await OutboxStore(modelContainer: container).pending()
+
+        XCTAssertEqual(stored, [appointment])
+        XCTAssertEqual(pending.map(\.id), [makeUUID(1), appointment.id])
+    }
 
     // MARK: - On-disk store without migration
 
@@ -141,4 +172,25 @@ final class SchemaMigrationTests: XCTestCase {
         let container = try PersistenceStack.makeContainer(storeURL: url)
         return try await ConsultationStore(modelContainer: container).consultations()
     }
+    
+    /// Writes rows with the frozen V2 schema (before appointments existed).
+    private func writeV2Store(at url: URL) throws {
+        let schema = Schema(versionedSchema: SehatSchemaV2.self)
+        let container = try ModelContainer(
+            for: schema,
+            configurations: ModelConfiguration(schema: schema, url: url, cloudKitDatabase: .none)
+        )
+        let context = ModelContext(container)
+        context.insert(SehatSchemaV2.ConsultationRecord(
+            id: makeUUID(1), doctorName: "Dr. V2", specialty: "General",
+            channelRaw: "chat", statusRaw: "scheduled",
+            scheduledAt: Date(timeIntervalSince1970: 700), serverVersion: 4
+        ))
+        context.insert(SehatSchemaV2.OutboxRecord(
+            id: makeUUID(1), sequence: 1, entityID: makeUUID(1),
+            kind: "consultation.cancel", payload: Data("v2".utf8)
+        ))
+        try context.save()
+    }
+
 }

@@ -26,20 +26,7 @@ public actor OutboxStore: ModelActor, OutboxQueue {
 
     public func enqueue(_ entry: OutboxEntry) async throws {
         do {
-            let targetID = entry.id
-            var existing = FetchDescriptor<OutboxRecord>(
-                predicate: #Predicate<OutboxRecord> { $0.id == targetID }
-            )
-            existing.fetchLimit = 1
-            guard try modelContext.fetch(existing).isEmpty else { return }
-
-            var latest = FetchDescriptor<OutboxRecord>(
-                sortBy: [SortDescriptor(\OutboxRecord.sequence, order: .reverse)]
-            )
-            latest.fetchLimit = 1
-            let nextSequence = (try modelContext.fetch(latest).first?.sequence ?? 0) + 1
-
-            modelContext.insert(OutboxRecord(entry, sequence: nextSequence))
+            try modelContext.appendToOutbox(entry)
             try modelContext.save()
         } catch {
             modelContext.rollback()
