@@ -21,7 +21,7 @@ public enum HTTPMethod: String, Sendable {
     }
 }
 
-public struct HTTPRequest: Sendable, Equatable {
+public struct HTTPRequest: Sendable, Hashable {
     public var url: URL
     public var method: HTTPMethod
     public var headers: [String: String]
