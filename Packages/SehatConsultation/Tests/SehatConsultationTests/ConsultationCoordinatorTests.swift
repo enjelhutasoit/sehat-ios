@@ -2,6 +2,7 @@
 // Copyright (c) 2026 Enjel Hutasoit
 //
 
+import SehatCore
 import SehatDomain
 import XCTest
 

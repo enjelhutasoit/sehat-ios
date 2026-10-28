@@ -11,6 +11,7 @@
 		EF776C9B309252B50003714C /* SehatDomain in Frameworks */ = {isa = PBXBuildFile; productRef = EF776C9A309252B50003714C /* SehatDomain */; };
 		EF776C9E309252CC0003714C /* SehatPersistence in Frameworks */ = {isa = PBXBuildFile; productRef = EF776C9D309252CC0003714C /* SehatPersistence */; };
 		EF776CA1309252DE0003714C /* SehatConsultation in Frameworks */ = {isa = PBXBuildFile; productRef = EF776CA0309252DE0003714C /* SehatConsultation */; };
+		EFD2DB8330925E330038DB79 /* SehatAppointment in Frameworks */ = {isa = PBXBuildFile; productRef = EFD2DB8230925E330038DB79 /* SehatAppointment */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 			files = (
 				EF776C9E309252CC0003714C /* SehatPersistence in Frameworks */,
 				EF776CA1309252DE0003714C /* SehatConsultation in Frameworks */,
+				EFD2DB8330925E330038DB79 /* SehatAppointment in Frameworks */,
 				EF776C9B309252B50003714C /* SehatDomain in Frameworks */,
 				EF05617930910BA200D23B30 /* SehatCore in Frameworks */,
 			);
@@ -80,6 +82,7 @@
 				EF776C9A309252B50003714C /* SehatDomain */,
 				EF776C9D309252CC0003714C /* SehatPersistence */,
 				EF776CA0309252DE0003714C /* SehatConsultation */,
+				EFD2DB8230925E330038DB79 /* SehatAppointment */,
 			);
 			productName = Sehat;
 			productReference = EF05616630910B2100D23B30 /* Sehat.app */;
@@ -114,6 +117,7 @@
 				EF776C99309252B50003714C /* XCLocalSwiftPackageReference "../Packages/SehatDomain" */,
 				EF776C9C309252CC0003714C /* XCLocalSwiftPackageReference "../Packages/SehatPersistence" */,
 				EF776C9F309252DE0003714C /* XCLocalSwiftPackageReference "../Packages/SehatConsultation" */,
+				EFD2DB8130925E330038DB79 /* XCLocalSwiftPackageReference "../Packages/SehatAppointment" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = EF05616730910B2100D23B30 /* Products */;
@@ -363,6 +367,10 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../Packages/SehatConsultation;
 		};
+		EFD2DB8130925E330038DB79 /* XCLocalSwiftPackageReference "../Packages/SehatAppointment" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../Packages/SehatAppointment;
+		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -381,6 +389,10 @@
 		EF776CA0309252DE0003714C /* SehatConsultation */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SehatConsultation;
+		};
+		EFD2DB8230925E330038DB79 /* SehatAppointment */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SehatAppointment;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

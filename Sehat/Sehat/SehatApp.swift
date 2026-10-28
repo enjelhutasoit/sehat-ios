@@ -2,6 +2,7 @@
 // Copyright (c) 2026 Enjel Hutasoit
 //
 
+import SehatAppointment
 import SehatConsultation
 import SwiftUI
 
@@ -21,8 +22,13 @@ struct SehatApp: App {
         switch startup {
         case .loading:
             ProgressView()
-        case .ready(let coordinator):
-            ConsultationFlowView(coordinator: coordinator)
+        case .ready(let coordinators):
+            TabView {
+                ConsultationFlowView(coordinator: coordinators.consultation)
+                    .tabItem { Label("Consultations", systemImage: "stethoscope") }
+                AppointmentFlowView(coordinator: coordinators.appointment)
+                    .tabItem { Label("Appointments", systemImage: "calendar") }
+            }
         case .failed:
             ContentUnavailableView(
                 "Can't open local data",

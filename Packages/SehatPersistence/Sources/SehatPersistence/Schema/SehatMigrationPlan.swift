@@ -9,13 +9,15 @@ import SwiftData
 /// append it here with a stage, update `CurrentSchema`, and add a test.
 enum SehatMigrationPlan: SchemaMigrationPlan {
     static var schemas: [any VersionedSchema.Type] {
-        [SehatSchemaV1.self, SehatSchemaV2.self]
+        [SehatSchemaV1.self, SehatSchemaV2.self, SehatSchemaV3.self]
     }
 
     static var stages: [MigrationStage] {
         [
-            // Only adds `serverVersion` with a default value, so lightweight is enough.
-            .lightweight(fromVersion: SehatSchemaV1.self, toVersion: SehatSchemaV2.self)
+            // Adds `serverVersion` with a default value.
+            .lightweight(fromVersion: SehatSchemaV1.self, toVersion: SehatSchemaV2.self),
+            // Adds the appointment entity; existing entities are untouched.
+            .lightweight(fromVersion: SehatSchemaV2.self, toVersion: SehatSchemaV3.self)
         ]
     }
 }
