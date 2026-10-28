@@ -5,7 +5,7 @@ Offline-first telehealth reference app for iOS. All data is fake.
 Built as an engineering portfolio project: modular SPM, MVVM-C + Clean
 Architecture, async/await, SwiftData, and a test pyramid with CI.
 
-Status: early bootstrap (5%). See docs/adr for decisions.
+Status: in progress. See docs/adr for decisions.
 
 ## Run
 
