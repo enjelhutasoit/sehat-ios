@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		EF05617930910BA200D23B30 /* SehatCore in Frameworks */ = {isa = PBXBuildFile; productRef = EF05617830910BA200D23B30 /* SehatCore */; };
+		EF776C9B309252B50003714C /* SehatDomain in Frameworks */ = {isa = PBXBuildFile; productRef = EF776C9A309252B50003714C /* SehatDomain */; };
+		EF776C9E309252CC0003714C /* SehatPersistence in Frameworks */ = {isa = PBXBuildFile; productRef = EF776C9D309252CC0003714C /* SehatPersistence */; };
+		EF776CA1309252DE0003714C /* SehatConsultation in Frameworks */ = {isa = PBXBuildFile; productRef = EF776CA0309252DE0003714C /* SehatConsultation */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +30,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF776C9E309252CC0003714C /* SehatPersistence in Frameworks */,
+				EF776CA1309252DE0003714C /* SehatConsultation in Frameworks */,
+				EF776C9B309252B50003714C /* SehatDomain in Frameworks */,
 				EF05617930910BA200D23B30 /* SehatCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -71,6 +77,9 @@
 			name = Sehat;
 			packageProductDependencies = (
 				EF05617830910BA200D23B30 /* SehatCore */,
+				EF776C9A309252B50003714C /* SehatDomain */,
+				EF776C9D309252CC0003714C /* SehatPersistence */,
+				EF776CA0309252DE0003714C /* SehatConsultation */,
 			);
 			productName = Sehat;
 			productReference = EF05616630910B2100D23B30 /* Sehat.app */;
@@ -102,6 +111,9 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				EF05617730910BA200D23B30 /* XCLocalSwiftPackageReference "../Packages/SehatCore" */,
+				EF776C99309252B50003714C /* XCLocalSwiftPackageReference "../Packages/SehatDomain" */,
+				EF776C9C309252CC0003714C /* XCLocalSwiftPackageReference "../Packages/SehatPersistence" */,
+				EF776C9F309252DE0003714C /* XCLocalSwiftPackageReference "../Packages/SehatConsultation" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = EF05616730910B2100D23B30 /* Products */;
@@ -339,12 +351,36 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../Packages/SehatCore;
 		};
+		EF776C99309252B50003714C /* XCLocalSwiftPackageReference "../Packages/SehatDomain" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../Packages/SehatDomain;
+		};
+		EF776C9C309252CC0003714C /* XCLocalSwiftPackageReference "../Packages/SehatPersistence" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../Packages/SehatPersistence;
+		};
+		EF776C9F309252DE0003714C /* XCLocalSwiftPackageReference "../Packages/SehatConsultation" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../Packages/SehatConsultation;
+		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		EF05617830910BA200D23B30 /* SehatCore */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SehatCore;
+		};
+		EF776C9A309252B50003714C /* SehatDomain */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SehatDomain;
+		};
+		EF776C9D309252CC0003714C /* SehatPersistence */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SehatPersistence;
+		};
+		EF776CA0309252DE0003714C /* SehatConsultation */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SehatConsultation;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
