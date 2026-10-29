@@ -5,9 +5,6 @@
 import Foundation
 import SwiftData
 
-import Foundation
-import SwiftData
-
 /// Schema 3.0.0: adds appointments. Consultation and outbox models are
 /// unchanged copies of V2. Freeze this file when V4 is introduced.
 enum SehatSchemaV3: VersionedSchema {

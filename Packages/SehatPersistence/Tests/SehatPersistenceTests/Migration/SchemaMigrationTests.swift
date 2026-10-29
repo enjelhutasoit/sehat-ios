@@ -112,6 +112,35 @@ final class SchemaMigrationTests: XCTestCase {
         XCTAssertEqual(pending.map(\.id), [makeUUID(1), appointment.id])
     }
 
+    // MARK: - V3 to V4
+
+    func test_migrationFromV3_preservesAppointmentsConsultationsAndOutbox() async throws {
+        let url = try makeStoreURL()
+        try writeV3Store(at: url)
+        let container = try PersistenceStack.makeContainer(storeURL: url)
+
+        let appointments = try await AppointmentStore(modelContainer: container).appointments()
+        let consultations = try await ConsultationStore(modelContainer: container).consultations()
+        let pending = try await OutboxStore(modelContainer: container).pending()
+
+        XCTAssertEqual(appointments, [makeAppointment(id: 1, doctorName: "Dr. V3", at: 800)])
+        XCTAssertEqual(consultations, [makeConsultation(id: 1, doctorName: "Dr. V3", at: 700)])
+        XCTAssertEqual(pending.map(\.id), [makeUUID(1)])
+    }
+
+    func test_migrationFromV3_allowsSavingMedicationReminders() async throws {
+        let url = try makeStoreURL()
+        try writeV3Store(at: url)
+        let container = try PersistenceStack.makeContainer(storeURL: url)
+        let store = MedicationStore(modelContainer: container)
+        let reminder = makeReminder(id: 5)
+
+        try await store.save(reminder)
+        let loaded = try await store.reminders()
+
+        XCTAssertEqual(loaded, [reminder])
+    }
+
     // MARK: - On-disk store without migration
 
     func test_makeContainer_persistsDataAcrossReopen() async throws {
@@ -192,5 +221,28 @@ final class SchemaMigrationTests: XCTestCase {
         ))
         try context.save()
     }
-
+    
+    /// Writes rows with the frozen V3 schema (before medication reminders existed).
+    private func writeV3Store(at url: URL) throws {
+        let schema = Schema(versionedSchema: SehatSchemaV3.self)
+        let container = try ModelContainer(
+            for: schema,
+            configurations: ModelConfiguration(schema: schema, url: url, cloudKitDatabase: .none)
+        )
+        let context = ModelContext(container)
+        context.insert(SehatSchemaV3.ConsultationRecord(
+            id: makeUUID(1), doctorName: "Dr. V3", specialty: "General",
+            channelRaw: "chat", statusRaw: "scheduled",
+            scheduledAt: Date(timeIntervalSince1970: 700)
+        ))
+        context.insert(SehatSchemaV3.AppointmentRecord(
+            id: makeUUID(1), doctorName: "Dr. V3", specialty: "General",
+            startsAt: Date(timeIntervalSince1970: 800), statusRaw: "pending"
+        ))
+        context.insert(SehatSchemaV3.OutboxRecord(
+            id: makeUUID(1), sequence: 1, entityID: makeUUID(1),
+            kind: "appointment.book", payload: Data("v3".utf8)
+        ))
+        try context.save()
+    }
 }

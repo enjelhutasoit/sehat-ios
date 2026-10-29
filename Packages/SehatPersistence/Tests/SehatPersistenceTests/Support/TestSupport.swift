@@ -75,3 +75,26 @@ func makeAppointment(
         status: status
     )
 }
+
+func makeTime(_ hour: Int = 8, _ minute: Int = 0) -> TimeOfDay {
+    guard let time = TimeOfDay(hour: hour, minute: minute) else {
+        preconditionFailure("Invalid test fixture")
+    }
+    return time
+}
+
+func makeReminder(
+    id: Int = 1,
+    name: String = "Paracetamol",
+    hour: Int = 8,
+    minute: Int = 0,
+    isEnabled: Bool = true
+) -> MedicationReminder {
+    MedicationReminder(
+        id: makeUUID(id),
+        medicationName: name,
+        dosage: "1 tablet",
+        timeOfDay: makeTime(hour, minute),
+        isEnabled: isEnabled
+    )
+}

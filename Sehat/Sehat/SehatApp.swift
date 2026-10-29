@@ -4,6 +4,7 @@
 
 import SehatAppointment
 import SehatConsultation
+import SehatMedication
 import SwiftUI
 
 @main
@@ -28,6 +29,8 @@ struct SehatApp: App {
                     .tabItem { Label("Consultations", systemImage: "stethoscope") }
                 AppointmentFlowView(coordinator: coordinators.appointment)
                     .tabItem { Label("Appointments", systemImage: "calendar") }
+                MedicationFlowView(coordinator: coordinators.medication)
+                    .tabItem { Label("Medication", systemImage: "pills") }
             }
         case .failed:
             ContentUnavailableView(
