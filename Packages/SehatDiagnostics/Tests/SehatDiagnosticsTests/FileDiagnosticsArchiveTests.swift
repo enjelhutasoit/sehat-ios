@@ -72,7 +72,8 @@ final class FileDiagnosticsArchiveTests: XCTestCase {
         let directory = makeDirectory()
         let sut = makeSUT(directory: directory)
         try await sut.save(Data("x".utf8), kind: .metrics)
-        let record = try await XCTUnwrap(sut.records().first)
+        let records = try await sut.records()
+        let record = try XCTUnwrap(records.first)
         try FileManager.default.removeItem(at: directory.appendingPathComponent(record.id))
 
         await assertThrowsAppError(.notFound) { _ = try await sut.read(record) }
