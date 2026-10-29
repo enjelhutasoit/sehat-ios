@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        package: [SehatCore, SehatNetworking, SehatDomain, SehatPersistence, SehatConsultation, SehatAppointment, SehatMedication, SehatBackground, SehatDiagnostics]
+        package: [SehatCore, SehatNetworking, SehatDomain, SehatPersistence, SehatConsultation, SehatAppointment, SehatMedication, SehatBackground, SehatDiagnostics, SehatLocalizationChecks]
     steps:
       - uses: actions/checkout@v4
       - name: Swift version
