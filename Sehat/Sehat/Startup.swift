@@ -26,7 +26,7 @@ enum Startup {
 
     static func make() async -> Startup {
         do {
-            let container = try PersistenceStack.makeContainer()
+            let container = try await AppEnvironment.shared.container()
             let consultationStore = ConsultationStore(modelContainer: container)
             try await consultationStore.upsert(SampleData.consultations())
             let appointmentStore = AppointmentStore(modelContainer: container)

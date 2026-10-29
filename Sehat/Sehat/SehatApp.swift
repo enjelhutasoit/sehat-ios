@@ -9,12 +9,24 @@ import SwiftUI
 
 @main
 struct SehatApp: App {
+    @Environment(\.scenePhase) private var scenePhase
     @State private var startup = Startup.loading
+
+    init() {
+        // Must happen before the app finishes launching.
+        BackgroundRefresh.register()
+        DiagnosticsSetup.start()
+    }
 
     var body: some Scene {
         WindowGroup {
             content
                 .task { startup = await Startup.make() }
+        }
+        .onChange(of: scenePhase) { _, phase in
+            if phase == .background {
+                BackgroundRefresh.scheduleNextRefresh()
+            }
         }
     }
 
