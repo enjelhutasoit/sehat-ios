@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		EF05617930910BA200D23B30 /* SehatCore in Frameworks */ = {isa = PBXBuildFile; productRef = EF05617830910BA200D23B30 /* SehatCore */; };
+		EF49AF0330930ED6009B79A4 /* SehatBackground in Frameworks */ = {isa = PBXBuildFile; productRef = EF49AF0230930ED6009B79A4 /* SehatBackground */; };
+		EF49AF0630930EE2009B79A4 /* SehatDiagnostics in Frameworks */ = {isa = PBXBuildFile; productRef = EF49AF0530930EE2009B79A4 /* SehatDiagnostics */; };
 		EF776C9B309252B50003714C /* SehatDomain in Frameworks */ = {isa = PBXBuildFile; productRef = EF776C9A309252B50003714C /* SehatDomain */; };
 		EF776C9E309252CC0003714C /* SehatPersistence in Frameworks */ = {isa = PBXBuildFile; productRef = EF776C9D309252CC0003714C /* SehatPersistence */; };
 		EF776CA1309252DE0003714C /* SehatConsultation in Frameworks */ = {isa = PBXBuildFile; productRef = EF776CA0309252DE0003714C /* SehatConsultation */; };
@@ -19,9 +21,22 @@
 		EF05616630910B2100D23B30 /* Sehat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sehat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		EF6B5EF8309336BB003239A4 /* Exceptions for "Sehat" folder in "Sehat" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = EF05616530910B2100D23B30 /* Sehat */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		EF05616830910B2100D23B30 /* Sehat */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				EF6B5EF8309336BB003239A4 /* Exceptions for "Sehat" folder in "Sehat" target */,
+			);
 			path = Sehat;
 			sourceTree = "<group>";
 		};
@@ -37,6 +52,8 @@
 				EFD2DB8330925E330038DB79 /* SehatAppointment in Frameworks */,
 				EFD2DB9F3092702E0038DB79 /* SehatMedication in Frameworks */,
 				EF776C9B309252B50003714C /* SehatDomain in Frameworks */,
+				EF49AF0630930EE2009B79A4 /* SehatDiagnostics in Frameworks */,
+				EF49AF0330930ED6009B79A4 /* SehatBackground in Frameworks */,
 				EF05617930910BA200D23B30 /* SehatCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -86,6 +103,8 @@
 				EF776CA0309252DE0003714C /* SehatConsultation */,
 				EFD2DB8230925E330038DB79 /* SehatAppointment */,
 				EFD2DB9E3092702E0038DB79 /* SehatMedication */,
+				EF49AF0230930ED6009B79A4 /* SehatBackground */,
+				EF49AF0530930EE2009B79A4 /* SehatDiagnostics */,
 			);
 			productName = Sehat;
 			productReference = EF05616630910B2100D23B30 /* Sehat.app */;
@@ -122,6 +141,8 @@
 				EF776C9F309252DE0003714C /* XCLocalSwiftPackageReference "../Packages/SehatConsultation" */,
 				EFD2DB8130925E330038DB79 /* XCLocalSwiftPackageReference "../Packages/SehatAppointment" */,
 				EFD2DB9D3092702E0038DB79 /* XCLocalSwiftPackageReference "../Packages/SehatMedication" */,
+				EF49AF0130930ED6009B79A4 /* XCLocalSwiftPackageReference "../Packages/SehatBackground" */,
+				EF49AF0430930EE2009B79A4 /* XCLocalSwiftPackageReference "../Packages/SehatDiagnostics" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = EF05616730910B2100D23B30 /* Products */;
@@ -283,11 +304,13 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Sehat/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Sehat/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -312,11 +335,13 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Sehat/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Sehat/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -359,6 +384,14 @@
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../Packages/SehatCore;
 		};
+		EF49AF0130930ED6009B79A4 /* XCLocalSwiftPackageReference "../Packages/SehatBackground" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../Packages/SehatBackground;
+		};
+		EF49AF0430930EE2009B79A4 /* XCLocalSwiftPackageReference "../Packages/SehatDiagnostics" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../Packages/SehatDiagnostics;
+		};
 		EF776C99309252B50003714C /* XCLocalSwiftPackageReference "../Packages/SehatDomain" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../Packages/SehatDomain;
@@ -385,6 +418,14 @@
 		EF05617830910BA200D23B30 /* SehatCore */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SehatCore;
+		};
+		EF49AF0230930ED6009B79A4 /* SehatBackground */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SehatBackground;
+		};
+		EF49AF0530930EE2009B79A4 /* SehatDiagnostics */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SehatDiagnostics;
 		};
 		EF776C9A309252B50003714C /* SehatDomain */ = {
 			isa = XCSwiftPackageProductDependency;
