@@ -34,19 +34,3 @@ extension Consultation.Status {
         }
     }
 }
-
-extension AppError {
-    var messageKey: LocalizedStringKey {
-        switch self {
-        case .offline: return "No internet connection."
-        case .timedOut: return "The request took too long. Try again."
-        case .server: return "The server had a problem. Try again later."
-        case .unauthorized: return "Your session has expired. Sign in again."
-        case .notFound: return "This item could not be found."
-        case .decoding: return "We couldn't read the data we received."
-        case .storage: return "We couldn't read data stored on this device."
-        case .cancelled: return "The operation was cancelled."
-        case .unknown: return "Something went wrong."
-        }
-    }
-}
