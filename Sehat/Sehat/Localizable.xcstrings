@@ -1,0 +1,14 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Consultations" : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Konsultasi" } } } },
+    "Appointments" : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Janji temu" } } } },
+    "Medication" : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Obat" } } } },
+    "Can't open local data" : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Tidak dapat membuka data lokal" } } } },
+    "Restart the app. The app did not delete anything." : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Mulai ulang aplikasi. Aplikasi tidak menghapus apa pun." } } } },
+    "Medication reminder" : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Pengingat obat" } } } },
+    "It's time to take your medication." : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Saatnya minum obat Anda." } } } },
+    "Loading" : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Memuat" } } } }
+  },
+  "version" : "1.0"
+}

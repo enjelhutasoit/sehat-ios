@@ -11,7 +11,7 @@ struct ConsultationListScreen: View {
 
     var body: some View {
         content
-            .navigationTitle("Consultations")
+            .navigationTitle(Strings.consultations)
             .task { await viewModel.load() }
     }
 
@@ -20,6 +20,7 @@ struct ConsultationListScreen: View {
         switch viewModel.state {
         case .idle, .loading:
             ProgressView()
+                .accessibilityLabel(Strings.loading)
         case .failed(let error):
             ErrorStateView(error: error) {
                 Task { await viewModel.load() }
@@ -27,9 +28,9 @@ struct ConsultationListScreen: View {
         case .loaded(let overview):
             if overview.isEmpty {
                 ContentUnavailableView(
-                    "No consultations",
+                    Strings.noConsultations,
                     systemImage: "stethoscope",
-                    description: Text("Your consultations will appear here.")
+                    description: Text(Strings.noConsultationsDescription)
                 )
             } else {
                 list(overview)
@@ -40,10 +41,10 @@ struct ConsultationListScreen: View {
     private func list(_ overview: ConsultationOverview) -> some View {
         List {
             if !overview.upcoming.isEmpty {
-                Section("Upcoming") { rows(overview.upcoming) }
+                Section(Strings.upcoming) { rows(overview.upcoming) }
             }
             if !overview.history.isEmpty {
-                Section("History") { rows(overview.history) }
+                Section(Strings.history) { rows(overview.history) }
             }
         }
         .refreshable { await viewModel.load() }
@@ -56,6 +57,7 @@ struct ConsultationListScreen: View {
             } label: {
                 ConsultationRow(consultation: consultation)
             }
+            .accessibilityHint(Strings.opensConsultationDetails)
         }
     }
 }

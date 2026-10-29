@@ -1,41 +1,41 @@
-# ADR-0012: Background refresh coordinator and diagnostics archive
+# ADR-0013: Localization and accessibility
 
 Status: Accepted
 
 ## Context
-The app should be able to do small maintenance work in the background and
-collect field performance data (MetricKit). System types (BGTask, MetricKit
-payloads) cannot be created in tests, and a background launch has no UI.
+The app needs Indonesian and English text, and every screen must work with
+VoiceOver and large text. Until now UI text was temporary English literals.
 
 ## Decision
-- `BackgroundRefreshCoordinator` (package `SehatBackground`, no dependencies)
-  holds the rules: schedule the next refresh first, never let a scheduling
-  failure stop the work, cancel the work on expiration, and complete the task
-  exactly once with success only if the work did not throw.
-- BGTaskScheduler and BGTask are wrapped by two small protocols; the adapters
-  live in the app target and are verified manually on a device.
-- The only job today is reminder reconciliation. Server sync is not wired:
-  no remote adapter exists.
-- `AppEnvironment` creates the SwiftData container once and is reachable
-  without UI, so a background launch and the normal startup share it.
-- Handlers are registered in `SehatApp.init`, before launch completes; the
-  next refresh is scheduled when the scene goes to the background.
-- MetricKit payloads are stored as JSON files on the device by
-  `FileDiagnosticsArchive`, with a per-kind retention limit. Nothing is uploaded.
+- One String Catalog per UI package and one for the app. Keys are English
+  text, except `error.*` keys (identifiers from `AppError.localizationKey`)
+  which carry an explicit English value and a manual extraction state.
+- Package text is read with `String(localized:bundle: .module)` and passed to
+  SwiftUI's string-based APIs: SwiftUI looks up literal keys in the main
+  bundle, not in a package bundle. A `Strings` enum per package holds them;
+  properties are computed so the language is read at display time.
+- A test-only package (`SehatLocalizationChecks`) reads every catalog as JSON
+  and checks: source language `en`, a translated non-empty `id` value for each
+  string, an `en` value for symbolic keys, and equal format specifiers.
+- Dynamic Type: system text styles, `@ScaledMetric` for icon width, and a
+  vertical layout for rows at accessibility sizes.
+- VoiceOver: rows are one element with a combined label; decorative icons are
+  hidden; hints on row buttons and toggles; labels on progress indicators.
+- Notification text is localized in the app target; its language is fixed when
+  the notification is scheduled.
 
 ## Alternatives considered
-- Calling BGTaskScheduler directly from the app: untestable rules.
-- Building dependencies in `Startup` only: a background launch may never run it.
-- Logging payloads to the console: lost after the run, no retention.
-- Uploading payloads: needs a backend and a privacy review.
-- A Crashlytics-style third-party SDK: out of scope and not free of review.
+- `Text("key")` in packages: looks in the wrong bundle.
+- Per-view `Text(..., bundle: .module)`: not available on every API used here.
+- A shared strings package: couples features; duplicated common words are cheap.
+- `.strings` and `.stringsdict` files: more files, no editor support for state.
+- Snapshot tests for large text: not in the current roadmap.
 
 ## Consequences / known limitations
-- The BGTask adapter cannot be verified on the simulator (Apple: the debug
-  triggers work only on devices). Without a device it stays unverified.
-- Scheduling, work and archive failures are not logged (no logging yet).
-- The system decides when, or whether, a refresh runs.
-- Payload contents were not audited; exported files must not be committed
-  without review.
-- `BGTask` is wrapped with `@unchecked Sendable`.
-- Server sync wiring is decided in PR17.
+- Indonesian text was written without a professional translator and needs review.
+- Views, `Strings`, and the time formatter are not unit-tested; VoiceOver and
+  Dynamic Type are verified manually (and by UI tests from PR14).
+- The checks do not judge translation quality, text length, or layout.
+- No RTL, plural, or count handling (no such strings exist).
+- Dates and times follow the device region, which can differ from the app language.
+- Sample data is not localized.

@@ -2,29 +2,34 @@
 // Copyright (c) 2026 Enjel Hutasoit
 //
 
+import Foundation
 import SehatDomain
-import SwiftUI
-
-// Temporary English literals. PR13 replaces them with string catalog lookups
-// (id/en) and a locale-aware time format.
 
 extension TimeOfDay {
+    /// Follows the device language and region. A thin wrapper over the system
+    /// formatter, so it has no test of its own.
     var displayText: String {
-        String(format: "%02d:%02d", hour, minute)
+        var components = DateComponents()
+        components.hour = hour
+        components.minute = minute
+        guard let date = Calendar.current.date(from: components) else {
+            return String(format: "%02d:%02d", hour, minute)
+        }
+        return date.formatted(date: .omitted, time: .shortened)
     }
 }
 
 extension ReminderFormViewModel.Failure {
-    var messageKey: LocalizedStringKey {
+    var message: String {
         switch self {
         case .validation(let error):
             switch error {
-            case .missingMedicationName: return "Enter the medication name."
-            case .missingDosage: return "Enter the dosage."
-            case .notFound: return "This reminder no longer exists."
+            case .missingMedicationName: return Strings.enterMedicationName
+            case .missingDosage: return Strings.enterDosage
+            case .notFound: return Strings.reminderNoLongerExists
             }
         case .system:
-            return "We couldn't save or schedule this reminder. Try again."
+            return Strings.couldntSaveOrSchedule
         }
     }
 }

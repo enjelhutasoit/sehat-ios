@@ -15,7 +15,7 @@ struct ConsultationDetailScreen: View {
 
     var body: some View {
         content
-            .navigationTitle("Consultation")
+            .navigationTitle(Strings.consultation)
             .task { await viewModel.load() }
     }
 
@@ -24,6 +24,7 @@ struct ConsultationDetailScreen: View {
         switch viewModel.state {
         case .idle, .loading:
             ProgressView()
+                .accessibilityLabel(Strings.loading)
         case .failed(let error):
             ErrorStateView(error: error) {
                 Task { await viewModel.load() }
@@ -35,11 +36,11 @@ struct ConsultationDetailScreen: View {
 
     private func details(_ consultation: Consultation) -> some View {
         List {
-            LabeledContent("Doctor", value: consultation.doctorName)
-            LabeledContent("Specialty", value: consultation.specialty)
-            LabeledContent("Channel") { Text(consultation.channel.titleKey) }
-            LabeledContent("Status") { Text(consultation.status.titleKey) }
-            LabeledContent("Date") {
+            LabeledContent(Strings.doctor, value: consultation.doctorName)
+            LabeledContent(Strings.specialty, value: consultation.specialty)
+            LabeledContent(Strings.channel, value: consultation.channel.title)
+            LabeledContent(Strings.status, value: consultation.status.title)
+            LabeledContent(Strings.date) {
                 Text(consultation.scheduledAt, format: .dateTime.day().month().year().hour().minute())
             }
         }

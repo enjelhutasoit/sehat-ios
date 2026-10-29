@@ -1,0 +1,29 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Medication" : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Obat" } } } },
+    "Add reminder" : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Tambah pengingat" } } } },
+    "Couldn't update the reminder" : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Pengingat tidak dapat diperbarui" } } } },
+    "OK" : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "OK" } } } },
+    "Try again" : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Coba lagi" } } } },
+    "Couldn't load reminders" : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Gagal memuat pengingat" } } } },
+    "Notifications are off. Turn them on in Settings to receive reminders." : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Notifikasi mati. Aktifkan di Pengaturan untuk menerima pengingat." } } } },
+    "Delete" : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Hapus" } } } },
+    "No reminders yet. Add one with the plus button." : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Belum ada pengingat. Tambahkan dengan tombol plus." } } } },
+    "Name" : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Nama" } } } },
+    "Dosage (for example, 1 tablet)" : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Dosis (misalnya, 1 tablet)" } } } },
+    "Time" : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Waktu" } } } },
+    "Every day at" : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Setiap hari pukul" } } } },
+    "New reminder" : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Pengingat baru" } } } },
+    "Cancel" : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Batal" } } } },
+    "Save" : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Simpan" } } } },
+    "The notification shows a general message and never the medication name." : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Notifikasi hanya menampilkan pesan umum dan tidak pernah menyebut nama obat." } } } },
+    "Enter the medication name." : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Masukkan nama obat." } } } },
+    "Enter the dosage." : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Masukkan dosis." } } } },
+    "This reminder no longer exists." : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Pengingat ini sudah tidak ada." } } } },
+    "We couldn't save or schedule this reminder. Try again." : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Kami tidak dapat menyimpan atau menjadwalkan pengingat ini. Coba lagi." } } } },
+    "Loading" : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Memuat" } } } },
+    "Turns the reminder on or off." : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Mengaktifkan atau menonaktifkan pengingat." } } } }
+  },
+  "version" : "1.0"
+}

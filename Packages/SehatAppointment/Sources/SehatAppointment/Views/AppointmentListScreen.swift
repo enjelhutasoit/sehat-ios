@@ -12,11 +12,11 @@ struct AppointmentListScreen: View {
 
     var body: some View {
         content
-            .navigationTitle("Appointments")
+            .navigationTitle(Strings.appointments)
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button(action: onBook) {
-                        Label("Book appointment", systemImage: "plus")
+                        Label(Strings.bookAppointment, systemImage: "plus")
                     }
                 }
             }
@@ -28,18 +28,19 @@ struct AppointmentListScreen: View {
         switch viewModel.state {
         case .idle, .loading:
             ProgressView()
+                .accessibilityLabel(Strings.loading)
         case .failed:
             ContentUnavailableView {
-                Label("Couldn't load appointments", systemImage: "exclamationmark.triangle")
+                Label(Strings.couldntLoadAppointments, systemImage: "exclamationmark.triangle")
             } actions: {
-                Button("Try again") { Task { await viewModel.load() } }
+                Button(Strings.tryAgain) { Task { await viewModel.load() } }
             }
         case .loaded(let appointments):
             if appointments.isEmpty {
                 ContentUnavailableView(
-                    "No appointments",
+                    Strings.noAppointments,
                     systemImage: "calendar",
-                    description: Text("Book one with the plus button.")
+                    description: Text(Strings.noAppointmentsDescription)
                 )
             } else {
                 List(appointments) { AppointmentRow(appointment: $0) }

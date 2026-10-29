@@ -1,0 +1,28 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Appointments" : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Janji temu" } } } },
+    "Book appointment" : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Pesan janji temu" } } } },
+    "Couldn't load appointments" : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Gagal memuat janji temu" } } } },
+    "Try again" : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Coba lagi" } } } },
+    "No appointments" : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Belum ada janji temu" } } } },
+    "Book one with the plus button." : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Pesan janji temu dengan tombol plus." } } } },
+    "Doctor" : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Dokter" } } } },
+    "Doctor name" : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Nama dokter" } } } },
+    "Specialty" : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Spesialisasi" } } } },
+    "When" : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Kapan" } } } },
+    "Starts at" : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Mulai pada" } } } },
+    "Cancel" : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Batal" } } } },
+    "Book" : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Pesan" } } } },
+    "Loading" : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Memuat" } } } },
+    "Pending" : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Menunggu" } } } },
+    "Confirmed" : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Terkonfirmasi" } } } },
+    "Enter the doctor's name." : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Masukkan nama dokter." } } } },
+    "Enter the specialty." : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Masukkan spesialisasi." } } } },
+    "Pick a time in the future." : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Pilih waktu di masa depan." } } } },
+    "You already have an appointment at this time." : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Anda sudah punya janji temu pada waktu ini." } } } },
+    "We couldn't save this appointment on your device." : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Kami tidak dapat menyimpan janji temu ini di perangkat Anda." } } } },
+    "Something went wrong. Try again." : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Terjadi kesalahan. Coba lagi." } } } }
+  },
+  "version" : "1.0"
+}

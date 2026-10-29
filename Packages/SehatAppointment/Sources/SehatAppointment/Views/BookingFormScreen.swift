@@ -18,13 +18,13 @@ struct BookingFormScreen: View {
 
         NavigationStack {
             Form {
-                Section("Doctor") {
-                    TextField("Doctor name", text: $form.doctorName)
-                    TextField("Specialty", text: $form.specialty)
+                Section(Strings.doctor) {
+                    TextField(Strings.doctorName, text: $form.doctorName)
+                    TextField(Strings.specialty, text: $form.specialty)
                 }
-                Section("When") {
+                Section(Strings.when) {
                     DatePicker(
-                        "Starts at",
+                        Strings.startsAt,
                         selection: $form.startsAt,
                         in: Date.now...,
                         displayedComponents: [.date, .hourAndMinute]
@@ -32,18 +32,18 @@ struct BookingFormScreen: View {
                 }
                 if case .failed(let failure) = viewModel.phase {
                     Section {
-                        Text(failure.messageKey)
+                        Text(failure.message)
                             .foregroundStyle(.secondary)
                     }
                 }
             }
-            .navigationTitle("Book appointment")
+            .navigationTitle(Strings.bookAppointment)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel", action: onCancel)
+                    Button(Strings.cancel, action: onCancel)
                 }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Book") { Task { await viewModel.submit() } }
+                    Button(Strings.book) { Task { await viewModel.submit() } }
                         .disabled(viewModel.phase == .submitting)
                 }
             }
