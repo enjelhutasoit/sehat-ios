@@ -4,6 +4,8 @@
 
 import SehatAppointment
 import SehatConsultation
+import SehatDomain
+import SehatMedication
 import SehatPersistence
 import SwiftData
 
@@ -15,6 +17,7 @@ enum Startup {
     struct Coordinators {
         let consultation: ConsultationCoordinator
         let appointment: AppointmentCoordinator
+        let medication: MedicationCoordinator
     }
 
     case loading
@@ -27,11 +30,24 @@ enum Startup {
             let consultationStore = ConsultationStore(modelContainer: container)
             try await consultationStore.upsert(SampleData.consultations())
             let appointmentStore = AppointmentStore(modelContainer: container)
+            let medicationStore = MedicationStore(modelContainer: container)
+            let reminderScheduler = UserNotificationReminderScheduler()
+
+            // Heals drift between stored reminders and scheduled notifications.
+            // A failure is not fatal: the next change or launch retries.
+            _ = try? await ReconcileRemindersUseCase(
+                repository: medicationStore,
+                scheduler: reminderScheduler
+            ).execute()
 
             return .ready(
                 Coordinators(
                     consultation: ConsultationCoordinator(repository: consultationStore),
-                    appointment: AppointmentCoordinator(repository: appointmentStore)
+                    appointment: AppointmentCoordinator(repository: appointmentStore),
+                    medication: MedicationCoordinator(
+                        repository: medicationStore,
+                        scheduler: reminderScheduler
+                    )
                 )
             )
         } catch {
