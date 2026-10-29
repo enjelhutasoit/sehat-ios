@@ -12,19 +12,19 @@ struct MedicationListScreen: View {
 
     var body: some View {
         content
-            .navigationTitle("Medication")
+            .navigationTitle(Strings.medication)
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button(action: onAdd) {
-                        Label("Add reminder", systemImage: "plus")
+                        Label(Strings.addReminder, systemImage: "plus")
                     }
                 }
             }
             .task(id: refreshToken) { await viewModel.load() }
-            .alert("Couldn't update the reminder", isPresented: failureBinding) {
-                Button("OK") { viewModel.dismissFailure() }
+            .alert(Strings.couldntUpdateReminder, isPresented: failureBinding) {
+                Button(Strings.ok) { viewModel.dismissFailure() }
             } message: {
-                Text("Try again.")
+                Text(Strings.tryAgain)
             }
     }
 
@@ -40,11 +40,12 @@ struct MedicationListScreen: View {
         switch viewModel.state {
         case .idle, .loading:
             ProgressView()
+                .accessibilityLabel(Strings.loading)
         case .failed:
             ContentUnavailableView {
-                Label("Couldn't load reminders", systemImage: "exclamationmark.triangle")
+                Label(Strings.couldntLoadReminders, systemImage: "exclamationmark.triangle")
             } actions: {
-                Button("Try again") { Task { await viewModel.load() } }
+                Button(Strings.tryAgain) { Task { await viewModel.load() } }
             }
         case .loaded(let overview):
             loaded(overview)
@@ -55,7 +56,7 @@ struct MedicationListScreen: View {
         List {
             if overview.authorization == .denied {
                 Section {
-                    Text("Notifications are off. Turn them on in Settings to receive reminders.")
+                    Text(Strings.notificationsAreOff)
                         .font(.footnote)
                 }
             }
@@ -65,14 +66,14 @@ struct MedicationListScreen: View {
                         Task { await viewModel.setEnabled(reminder, isEnabled: isEnabled) }
                     }
                     .swipeActions {
-                        Button("Delete", role: .destructive) {
+                        Button(Strings.delete, role: .destructive) {
                             Task { await viewModel.delete(reminder) }
                         }
                     }
                 }
             } footer: {
                 if overview.reminders.isEmpty {
-                    Text("No reminders yet. Add one with the plus button.")
+                    Text(Strings.noRemindersYet)
                 }
             }
         }

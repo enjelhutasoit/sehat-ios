@@ -18,32 +18,32 @@ struct ReminderFormScreen: View {
 
         NavigationStack {
             Form {
-                Section("Medication") {
-                    TextField("Name", text: $form.medicationName)
-                    TextField("Dosage (for example, 1 tablet)", text: $form.dosage)
+                Section(Strings.medication) {
+                    TextField(Strings.name, text: $form.medicationName)
+                    TextField(Strings.dosagePlaceholder, text: $form.dosage)
                 }
-                Section("Time") {
-                    DatePicker("Every day at", selection: $form.time, displayedComponents: .hourAndMinute)
+                Section(Strings.time) {
+                    DatePicker(Strings.everyDayAt, selection: $form.time, displayedComponents: .hourAndMinute)
                 }
                 if case .failed(let failure) = viewModel.phase {
                     Section {
-                        Text(failure.messageKey)
+                        Text(failure.message)
                             .foregroundStyle(.secondary)
                     }
                 }
                 Section {
-                    Text("The notification shows a general message and never the medication name.")
+                    Text(Strings.notificationPrivacyNote)
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                 }
             }
-            .navigationTitle("New reminder")
+            .navigationTitle(Strings.newReminder)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel", action: onCancel)
+                    Button(Strings.cancel, action: onCancel)
                 }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Save") { Task { await viewModel.submit() } }
+                    Button(Strings.save) { Task { await viewModel.submit() } }
                         .disabled(viewModel.phase == .submitting)
                 }
             }

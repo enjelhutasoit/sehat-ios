@@ -22,5 +22,6 @@ struct MedicationRow: View {
                     .foregroundStyle(.secondary)
             }
         }
+        .accessibilityHint(Strings.turnsReminderOnOrOff)
     }
 }

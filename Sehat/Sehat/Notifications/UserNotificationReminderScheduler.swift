@@ -42,8 +42,8 @@ struct UserNotificationReminderScheduler: ReminderScheduler {
         time.minute = reminder.timeOfDay.minute
 
         let content = UNMutableNotificationContent()
-        content.title = "Medication reminder"
-        content.body = "It's time to take your medication."
+        content.title = String(localized: "Medication reminder")
+        content.body = String(localized: "It's time to take your medication.")
         content.sound = .default
 
         let identifier = reminder.id.uuidString

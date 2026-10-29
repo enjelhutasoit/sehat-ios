@@ -6,13 +6,11 @@ import SehatCore
 import SehatDomain
 import SwiftUI
 
-// Temporary English literals. PR13 replaces them with string catalog lookups (id/en).
-
 extension Appointment.Status {
-    var titleKey: LocalizedStringKey {
+    var title: String {
         switch self {
-        case .pending: return "Pending"
-        case .confirmed: return "Confirmed"
+        case .pending: return Strings.pending
+        case .confirmed: return Strings.confirmed
         }
     }
 
@@ -25,20 +23,18 @@ extension Appointment.Status {
 }
 
 extension BookingViewModel.Failure {
-    var messageKey: LocalizedStringKey {
+    var message: String {
         switch self {
         case .validation(let error):
             switch error {
-            case .missingDoctorName: return "Enter the doctor's name."
-            case .missingSpecialty: return "Enter the specialty."
-            case .startsInThePast: return "Pick a time in the future."
-            case .slotAlreadyBooked: return "You already have an appointment at this time."
+            case .missingDoctorName: return Strings.enterDoctorName
+            case .missingSpecialty: return Strings.enterSpecialty
+            case .startsInThePast: return Strings.pickFutureTime
+            case .slotAlreadyBooked: return Strings.slotAlreadyBooked
             }
         case .system(let error):
             // Only storage failures are expected here; the rest share one message.
-            return error == .storage
-                ? "We couldn't save this appointment on your device."
-                : "Something went wrong. Try again."
+            return error == .storage ? Strings.couldntSaveAppointment : Strings.somethingWentWrongTryAgain
         }
     }
 }

@@ -35,6 +35,7 @@ struct SehatApp: App {
         switch startup {
         case .loading:
             ProgressView()
+                .accessibilityLabel("Loading")
         case .ready(let coordinators):
             TabView {
                 ConsultationFlowView(coordinator: coordinators.consultation)

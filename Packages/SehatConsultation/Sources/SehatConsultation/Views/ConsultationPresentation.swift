@@ -6,15 +6,12 @@ import SehatCore
 import SehatDomain
 import SwiftUI
 
-// Temporary English literals. PR13 replaces them with string catalog lookups
-// (id/en), using `AppError.localizationKey` for errors.
-
 extension Consultation.Channel {
-    var titleKey: LocalizedStringKey {
+    var title: String {
         switch self {
-        case .chat: return "Chat"
-        case .video: return "Video call"
-        case .voice: return "Voice call"
+        case .chat: return Strings.chat
+        case .video: return Strings.videoCall
+        case .voice: return Strings.voiceCall
         }
     }
 
@@ -28,12 +25,12 @@ extension Consultation.Channel {
 }
 
 extension Consultation.Status {
-    var titleKey: LocalizedStringKey {
+    var title: String {
         switch self {
-        case .scheduled: return "Scheduled"
-        case .inProgress: return "In progress"
-        case .completed: return "Completed"
-        case .cancelled: return "Cancelled"
+        case .scheduled: return Strings.scheduled
+        case .inProgress: return Strings.inProgress
+        case .completed: return Strings.completed
+        case .cancelled: return Strings.cancelled
         }
     }
 }

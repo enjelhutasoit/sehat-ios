@@ -11,11 +11,11 @@ struct ErrorStateView: View {
 
     var body: some View {
         ContentUnavailableView {
-            Label("Something went wrong", systemImage: "exclamationmark.triangle")
+            Label(Strings.somethingWentWrong, systemImage: "exclamationmark.triangle")
         } description: {
-            Text(error.messageKey)
+            Text(Strings.message(for: error))
         } actions: {
-            Button("Try again") { retry() }
+            Button(Strings.tryAgain) { retry() }
         }
     }
 }

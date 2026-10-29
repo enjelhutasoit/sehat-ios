@@ -8,10 +8,32 @@ import SwiftUI
 struct ConsultationRow: View {
     let consultation: Consultation
 
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @ScaledMetric(relativeTo: .body) private var iconWidth: CGFloat = 28
+
     var body: some View {
+        Group {
+            if dynamicTypeSize.isAccessibilitySize {
+                VStack(alignment: .leading, spacing: 8) {
+                    summary
+                    statusText
+                }
+            } else {
+                HStack(spacing: 12) {
+                    summary
+                    Spacer()
+                    statusText
+                }
+            }
+        }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(accessibilityText)
+    }
+
+    private var summary: some View {
         HStack(spacing: 12) {
             Image(systemName: consultation.channel.symbolName)
-                .frame(width: 28)
+                .frame(width: iconWidth)
                 .accessibilityHidden(true)
 
             VStack(alignment: .leading, spacing: 2) {
@@ -24,13 +46,23 @@ struct ConsultationRow: View {
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
-
-            Spacer()
-
-            Text(consultation.status.titleKey)
-                .font(.caption)
-                .foregroundStyle(.secondary)
         }
-        .accessibilityElement(children: .combine)
+    }
+
+    private var statusText: some View {
+        Text(consultation.status.title)
+            .font(.caption)
+            .foregroundStyle(.secondary)
+    }
+
+    /// One spoken sentence per row: who, what, how, state, when.
+    private var accessibilityText: String {
+        [
+            consultation.doctorName,
+            consultation.specialty,
+            consultation.channel.title,
+            consultation.status.title,
+            consultation.scheduledAt.formatted(date: .abbreviated, time: .shortened)
+        ].joined(separator: ", ")
     }
 }

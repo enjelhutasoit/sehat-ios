@@ -3,6 +3,7 @@ import PackageDescription
 
 let package = Package(
     name: "SehatConsultation",
+    defaultLocalization: "en",
     platforms: [.iOS(.v17), .macOS(.v14)],
     products: [
         .library(name: "SehatConsultation", targets: ["SehatConsultation"])
@@ -17,7 +18,8 @@ let package = Package(
             dependencies: [
                 .product(name: "SehatCore", package: "SehatCore"),
                 .product(name: "SehatDomain", package: "SehatDomain")
-            ]
+            ],
+            resources: [.process("Resources")]
         ),
         .testTarget(
             name: "SehatConsultationTests",
