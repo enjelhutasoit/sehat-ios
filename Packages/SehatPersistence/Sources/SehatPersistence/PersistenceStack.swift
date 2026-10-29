@@ -36,6 +36,18 @@ public enum PersistenceStack {
         )
     }
 
+    /// Deletes the store file at `storeURL` and its SQLite side files
+    /// (`-wal`, `-shm`). Missing files are ignored and nothing else in the
+    /// directory is touched. Open containers on this store should be released first.
+    public static func removeStoreFiles(at storeURL: URL) throws {
+        for suffix in ["", "-wal", "-shm"] {
+            let path = storeURL.path + suffix
+            if FileManager.default.fileExists(atPath: path) {
+                try FileManager.default.removeItem(atPath: path)
+            }
+        }
+    }
+    
     private static func makeContainer(configuration: ModelConfiguration) throws -> ModelContainer {
         try ModelContainer(
             for: Schema(versionedSchema: CurrentSchema.self),

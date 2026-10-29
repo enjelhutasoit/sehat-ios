@@ -20,7 +20,9 @@ struct BookingFormScreen: View {
             Form {
                 Section(Strings.doctor) {
                     TextField(Strings.doctorName, text: $form.doctorName)
+                        .accessibilityIdentifier(AccessibilityID.doctorNameField)
                     TextField(Strings.specialty, text: $form.specialty)
+                        .accessibilityIdentifier(AccessibilityID.specialtyField)
                 }
                 Section(Strings.when) {
                     DatePicker(
@@ -34,6 +36,7 @@ struct BookingFormScreen: View {
                     Section {
                         Text(failure.message)
                             .foregroundStyle(.secondary)
+                            .accessibilityIdentifier(AccessibilityID.bookingError)
                     }
                 }
             }
@@ -45,6 +48,7 @@ struct BookingFormScreen: View {
                 ToolbarItem(placement: .confirmationAction) {
                     Button(Strings.book) { Task { await viewModel.submit() } }
                         .disabled(viewModel.phase == .submitting)
+                        .accessibilityIdentifier(AccessibilityID.submitBooking)
                 }
             }
         }
