@@ -18,6 +18,7 @@ struct AppointmentListScreen: View {
                     Button(action: onBook) {
                         Label(Strings.bookAppointment, systemImage: "plus")
                     }
+                    .accessibilityIdentifier(AccessibilityID.addAppointment)
                 }
             }
             .task(id: refreshToken) { await viewModel.load() }
