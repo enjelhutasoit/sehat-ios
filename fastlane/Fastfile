@@ -1,0 +1,134 @@
+# Run lanes from the repository root: `bundle exec fastlane <lane>`.
+# Logic that can be wrong lives in fastlane/lib and is tested in fastlane/test.
+# This file only connects it to the tools, so it has no tests of its own.
+
+require "fileutils"
+require "json"
+require "open3"
+
+tooling_lib = File.join(FastlaneCore::FastlaneFolder.path, "lib")
+%w[packages xcode_selector simulator_picker coverage_report].each do |name|
+  require File.join(tooling_lib, name)
+end
+
+repo_root = File.expand_path("..", FastlaneCore::FastlaneFolder.path)
+xcode_major = 16       # the project needs Xcode 16 (Swift 6 tools)
+minimum_ios = "17.0"   # same as the app's deployment target
+app_project = File.join(repo_root, "Sehat", "Sehat.xcodeproj")
+result_bundle = File.join(repo_root, "build", "ui-tests.xcresult")
+
+# On CI, use the newest installed Xcode of the required major version.
+# Locally, whatever Xcode is selected stays selected.
+private_lane :use_ci_xcode do
+  next unless ENV["CI"] == "true"
+
+  apps = Dir["/Applications/Xcode*.app"]
+  path = XcodeSelector.newest(apps, major: xcode_major)
+  UI.user_error!("No Xcode #{xcode_major}.x found. Installed: #{apps.sort.join(', ')}") if path.nil?
+
+  UI.message("Using #{path}")
+  ENV["DEVELOPER_DIR"] = File.join(path, "Contents", "Developer")
+end
+
+private_lane :simulator_udid do
+  sdk_version, sdk_status = Open3.capture2("xcrun", "--sdk", "iphonesimulator", "--show-sdk-version")
+  UI.user_error!("Could not read the iOS Simulator SDK version") unless sdk_status.success?
+
+  listing, list_status = Open3.capture2("xcrun", "simctl", "list", "devices", "available", "--json")
+  UI.user_error!("Could not list the available simulators") unless list_status.success?
+
+  udid = SimulatorPicker.pick(
+    JSON.parse(listing),
+    sdk_version: sdk_version.strip,
+    minimum_version: minimum_ios
+  )
+  if udid.nil?
+    UI.user_error!("No available iPhone simulator between iOS #{minimum_ios} and SDK #{sdk_version.strip}")
+  end
+
+  UI.message("Using simulator #{udid}")
+  udid
+end
+
+private_lane :print_coverage do |options|
+  package = options[:package]
+  directory = Packages.path(repo_root, package)
+
+  begin
+    codecov_path, status = Open3.capture2("swift", "test", "--show-codecov-path", chdir: directory)
+    raise "swift test --show-codecov-path failed" unless status.success?
+
+    UI.header("Coverage: #{package} (Views/ and Localization/ are excluded on purpose)")
+    sh(
+      *CoverageReport.arguments(
+        package: package,
+        all_packages: options[:all_packages],
+        package_dir: directory,
+        codecov_json_path: codecov_path.strip
+      )
+    )
+  rescue StandardError => e
+    UI.important("Coverage report failed for #{package} (tests passed): #{e.message}")
+  end
+end
+
+desc "Run the tests of the tooling code in fastlane/lib"
+lane :tooling_tests do
+  tests = File.join(repo_root, "fastlane", "test")
+  files = Dir[File.join(tests, "*_test.rb")].sort
+  UI.user_error!("No tooling tests found in #{tests}") if files.empty?
+
+  sh(
+    "ruby", "-I", tooling_lib, "-I", tests,
+    "-e", "ARGV.each { |file| require file }",
+    *files
+  )
+end
+
+desc "swift test with coverage for every package (or one: package:SehatCore), then print coverage"
+lane :package_tests do |options|
+  use_ci_xcode
+
+  all = Packages.all(repo_root)
+  selected = options[:package] ? [options[:package].to_s] : all
+  unknown = selected - all
+  UI.user_error!("Unknown package(s): #{unknown.join(', ')}. Known: #{all.join(', ')}") unless unknown.empty?
+
+  failed = selected.reject do |name|
+    UI.header("swift test: #{name}")
+    system("swift", "test", "--enable-code-coverage", chdir: Packages.path(repo_root, name))
+  end
+
+  selected.each do |name|
+    next if failed.include?(name) || !Packages.production_code?(repo_root, name)
+
+    print_coverage(package: name, all_packages: all)
+  end
+
+  UI.user_error!("Package tests failed: #{failed.join(', ')}") unless failed.empty?
+end
+
+desc "Build the app and run the UI tests on an iOS Simulator"
+lane :ui_tests do
+  use_ci_xcode
+  udid = simulator_udid
+
+  if ENV["CI"] == "true"
+    # Common mitigation for `typeText` failures. Its effect on the current
+    # runner image is not verified.
+    sh("defaults", "write", "com.apple.iphonesimulator", "ConnectHardwareKeyboard", "-bool", "false")
+  end
+
+  FileUtils.mkdir_p(File.dirname(result_bundle))
+  FileUtils.rm_rf(result_bundle)
+
+  sh(
+    "xcodebuild", "test",
+    "-project", app_project,
+    "-scheme", "Sehat",
+    "-destination", "platform=iOS Simulator,id=#{udid}",
+    "-only-testing:SehatUITests",
+    "-parallel-testing-enabled", "NO",
+    "-resultBundlePath", result_bundle
+  )
+end

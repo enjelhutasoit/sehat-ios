@@ -10,3 +10,7 @@ xcuserdata/
 *.ipa
 *.dSYM
 *.dSYM.zip
+.bundle/
+vendor/bundle/
+fastlane/report.xml
+fastlane/README.md
