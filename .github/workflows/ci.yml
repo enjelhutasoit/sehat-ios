@@ -35,6 +35,9 @@ jobs:
           bundler-cache: true
       - name: Tooling tests
         run: bundle exec fastlane tooling_tests
+      - name: Docs links
+        if: matrix.os == 'macos-15'
+        run: bundle exec fastlane docs_check
       - name: Package tests and coverage
         run: bundle exec fastlane package_tests
 
