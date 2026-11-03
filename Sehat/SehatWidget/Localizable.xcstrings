@@ -1,0 +1,10 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Next medication" : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Obat berikutnya" } } } },
+    "Shows when your next medication reminder is due." : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Menampilkan kapan pengingat obat Anda berikutnya." } } } },
+    "Open Sehat to set up reminders." : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Buka Sehat untuk mengatur pengingat." } } } },
+    "No medication reminders" : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Tidak ada pengingat obat" } } } }
+  },
+  "version" : "1.0"
+}

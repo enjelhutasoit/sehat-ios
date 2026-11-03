@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		EF05617930910BA200D23B30 /* SehatCore in Frameworks */ = {isa = PBXBuildFile; productRef = EF05617830910BA200D23B30 /* SehatCore */; };
+		EF13768B30990C0500746240 /* SehatWidgetSupport in Frameworks */ = {isa = PBXBuildFile; productRef = EF13768A30990C0500746240 /* SehatWidgetSupport */; };
+		EF13769330990C5F00746240 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF13769230990C5F00746240 /* WidgetKit.framework */; };
+		EF13769530990C5F00746240 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF13769430990C5F00746240 /* SwiftUI.framework */; };
+		EF1376A030990C6100746240 /* SehatWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = EF13769030990C5F00746240 /* SehatWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		EF1376A730990D0100746240 /* SehatWidgetSupport in Frameworks */ = {isa = PBXBuildFile; productRef = EF1376A630990D0100746240 /* SehatWidgetSupport */; };
 		EF49AF0330930ED6009B79A4 /* SehatBackground in Frameworks */ = {isa = PBXBuildFile; productRef = EF49AF0230930ED6009B79A4 /* SehatBackground */; };
 		EF49AF0630930EE2009B79A4 /* SehatDiagnostics in Frameworks */ = {isa = PBXBuildFile; productRef = EF49AF0530930EE2009B79A4 /* SehatDiagnostics */; };
 		EF776C9B309252B50003714C /* SehatDomain in Frameworks */ = {isa = PBXBuildFile; productRef = EF776C9A309252B50003714C /* SehatDomain */; };
@@ -18,6 +23,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		EF13769E30990C6100746240 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EF05615E30910B2100D23B30 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EF13768F30990C5F00746240;
+			remoteInfo = SehatWidgetExtension;
+		};
 		EFE022AC30938B26001B6AB1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = EF05615E30910B2100D23B30 /* Project object */;
@@ -27,12 +39,37 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		EF1376A530990C6100746240 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				EF1376A030990C6100746240 /* SehatWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		EF05616630910B2100D23B30 /* Sehat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sehat.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF13769030990C5F00746240 /* SehatWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SehatWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF13769230990C5F00746240 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		EF13769430990C5F00746240 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		EF1376A930990DA000746240 /* SehatWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SehatWidgetExtension.entitlements; sourceTree = "<group>"; };
 		EFE022A630938B26001B6AB1 /* SehatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SehatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		EF1376A430990C6100746240 /* Exceptions for "SehatWidget" folder in "SehatWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = EF13768F30990C5F00746240 /* SehatWidgetExtension */;
+		};
 		EF6B5EF8309336BB003239A4 /* Exceptions for "Sehat" folder in "Sehat" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -49,6 +86,14 @@
 				EF6B5EF8309336BB003239A4 /* Exceptions for "Sehat" folder in "Sehat" target */,
 			);
 			path = Sehat;
+			sourceTree = "<group>";
+		};
+		EF13769630990C5F00746240 /* SehatWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				EF1376A430990C6100746240 /* Exceptions for "SehatWidget" folder in "SehatWidgetExtension" target */,
+			);
+			path = SehatWidget;
 			sourceTree = "<group>";
 		};
 		EFE022A730938B26001B6AB1 /* SehatUITests */ = {
@@ -70,7 +115,18 @@
 				EF776C9B309252B50003714C /* SehatDomain in Frameworks */,
 				EF49AF0630930EE2009B79A4 /* SehatDiagnostics in Frameworks */,
 				EF49AF0330930ED6009B79A4 /* SehatBackground in Frameworks */,
+				EF13768B30990C0500746240 /* SehatWidgetSupport in Frameworks */,
 				EF05617930910BA200D23B30 /* SehatCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF13768D30990C5F00746240 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF13769530990C5F00746240 /* SwiftUI.framework in Frameworks */,
+				EF1376A730990D0100746240 /* SehatWidgetSupport in Frameworks */,
+				EF13769330990C5F00746240 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,8 +143,11 @@
 		EF05615D30910B2100D23B30 = {
 			isa = PBXGroup;
 			children = (
+				EF1376A930990DA000746240 /* SehatWidgetExtension.entitlements */,
 				EF05616830910B2100D23B30 /* Sehat */,
 				EFE022A730938B26001B6AB1 /* SehatUITests */,
+				EF13769630990C5F00746240 /* SehatWidget */,
+				EF13769130990C5F00746240 /* Frameworks */,
 				EF05616730910B2100D23B30 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -98,8 +157,18 @@
 			children = (
 				EF05616630910B2100D23B30 /* Sehat.app */,
 				EFE022A630938B26001B6AB1 /* SehatUITests.xctest */,
+				EF13769030990C5F00746240 /* SehatWidgetExtension.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		EF13769130990C5F00746240 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EF13769230990C5F00746240 /* WidgetKit.framework */,
+				EF13769430990C5F00746240 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -112,10 +181,12 @@
 				EF05616230910B2100D23B30 /* Sources */,
 				EF05616330910B2100D23B30 /* Frameworks */,
 				EF05616430910B2100D23B30 /* Resources */,
+				EF1376A530990C6100746240 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				EF13769F30990C6100746240 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				EF05616830910B2100D23B30 /* Sehat */,
@@ -130,10 +201,34 @@
 				EFD2DB9E3092702E0038DB79 /* SehatMedication */,
 				EF49AF0230930ED6009B79A4 /* SehatBackground */,
 				EF49AF0530930EE2009B79A4 /* SehatDiagnostics */,
+				EF13768A30990C0500746240 /* SehatWidgetSupport */,
 			);
 			productName = Sehat;
 			productReference = EF05616630910B2100D23B30 /* Sehat.app */;
 			productType = "com.apple.product-type.application";
+		};
+		EF13768F30990C5F00746240 /* SehatWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EF1376A130990C6100746240 /* Build configuration list for PBXNativeTarget "SehatWidgetExtension" */;
+			buildPhases = (
+				EF13768C30990C5F00746240 /* Sources */,
+				EF13768D30990C5F00746240 /* Frameworks */,
+				EF13768E30990C5F00746240 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				EF13769630990C5F00746240 /* SehatWidget */,
+			);
+			name = SehatWidgetExtension;
+			packageProductDependencies = (
+				EF1376A630990D0100746240 /* SehatWidgetSupport */,
+			);
+			productName = SehatWidgetExtension;
+			productReference = EF13769030990C5F00746240 /* SehatWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 		EFE022A530938B26001B6AB1 /* SehatUITests */ = {
 			isa = PBXNativeTarget;
@@ -171,6 +266,10 @@
 					EF05616530910B2100D23B30 = {
 						CreatedOnToolsVersion = 16.2;
 					};
+					EF13768F30990C5F00746240 = {
+						CreatedOnToolsVersion = 16.2;
+						LastSwiftMigration = 1620;
+					};
 					EFE022A530938B26001B6AB1 = {
 						CreatedOnToolsVersion = 16.2;
 						LastSwiftMigration = 1620;
@@ -197,6 +296,7 @@
 				EFD2DB9D3092702E0038DB79 /* XCLocalSwiftPackageReference "../Packages/SehatMedication" */,
 				EF49AF0130930ED6009B79A4 /* XCLocalSwiftPackageReference "../Packages/SehatBackground" */,
 				EF49AF0430930EE2009B79A4 /* XCLocalSwiftPackageReference "../Packages/SehatDiagnostics" */,
+				EF13768930990C0500746240 /* XCLocalSwiftPackageReference "../Packages/SehatWidgetSupport" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = EF05616730910B2100D23B30 /* Products */;
@@ -205,12 +305,20 @@
 			targets = (
 				EF05616530910B2100D23B30 /* Sehat */,
 				EFE022A530938B26001B6AB1 /* SehatUITests */,
+				EF13768F30990C5F00746240 /* SehatWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		EF05616430910B2100D23B30 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF13768E30990C5F00746240 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -234,6 +342,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EF13768C30990C5F00746240 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EFE022A230938B26001B6AB1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -244,6 +359,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		EF13769F30990C6100746240 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EF13768F30990C5F00746240 /* SehatWidgetExtension */;
+			targetProxy = EF13769E30990C6100746240 /* PBXContainerItemProxy */;
+		};
 		EFE022AD30938B26001B6AB1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = EF05616530910B2100D23B30 /* Sehat */;
@@ -378,9 +498,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Sehat/Sehat.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Sehat/Preview Content\"";
+				DEVELOPMENT_TEAM = FN97V72AGN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sehat/Info.plist;
@@ -409,9 +531,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Sehat/Sehat.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Sehat/Preview Content\"";
+				DEVELOPMENT_TEAM = FN97V72AGN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sehat/Info.plist;
@@ -429,6 +553,67 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.enjelhutasoit.Sehat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		EF1376A230990C6100746240 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = SehatWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FN97V72AGN;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SehatWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SehatWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.enjelhutasoit.Sehat.SehatWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		EF1376A330990C6100746240 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = SehatWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FN97V72AGN;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SehatWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SehatWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.enjelhutasoit.Sehat.SehatWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -493,6 +678,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		EF1376A130990C6100746240 /* Build configuration list for PBXNativeTarget "SehatWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF1376A230990C6100746240 /* Debug */,
+				EF1376A330990C6100746240 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		EFE022AE30938B26001B6AB1 /* Build configuration list for PBXNativeTarget "SehatUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -508,6 +702,10 @@
 		EF05617730910BA200D23B30 /* XCLocalSwiftPackageReference "../Packages/SehatCore" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../Packages/SehatCore;
+		};
+		EF13768930990C0500746240 /* XCLocalSwiftPackageReference "../Packages/SehatWidgetSupport" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../Packages/SehatWidgetSupport;
 		};
 		EF49AF0130930ED6009B79A4 /* XCLocalSwiftPackageReference "../Packages/SehatBackground" */ = {
 			isa = XCLocalSwiftPackageReference;
@@ -543,6 +741,15 @@
 		EF05617830910BA200D23B30 /* SehatCore */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SehatCore;
+		};
+		EF13768A30990C0500746240 /* SehatWidgetSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SehatWidgetSupport;
+		};
+		EF1376A630990D0100746240 /* SehatWidgetSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EF13768930990C0500746240 /* XCLocalSwiftPackageReference "../Packages/SehatWidgetSupport" */;
+			productName = SehatWidgetSupport;
 		};
 		EF49AF0230930ED6009B79A4 /* SehatBackground */ = {
 			isa = XCSwiftPackageProductDependency;

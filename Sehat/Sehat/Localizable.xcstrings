@@ -8,7 +8,13 @@
     "Restart the app. The app did not delete anything." : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Mulai ulang aplikasi. Aplikasi tidak menghapus apa pun." } } } },
     "Medication reminder" : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Pengingat obat" } } } },
     "It's time to take your medication." : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Saatnya minum obat Anda." } } } },
-    "Loading" : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Memuat" } } } }
+    "Loading" : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Memuat" } } } },
+    "Next medication reminder" : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Pengingat obat berikutnya" } } } },
+    "Tells you when your next medication reminder is due." : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Memberi tahu kapan pengingat obat Anda berikutnya." } } } },
+    "You have no medication reminders." : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Anda tidak punya pengingat obat." } } } },
+    "Your next medication reminder is at %@." : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Pengingat obat Anda berikutnya pukul %@." } } } },
+    "Your next medication reminder is tomorrow at %@." : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Pengingat obat Anda berikutnya besok pukul %@." } } } },
+    "Next reminder" : { "localizations" : { "id" : { "stringUnit" : { "state" : "translated", "value" : "Pengingat berikutnya" } } } }
   },
   "version" : "1.0"
 }

@@ -7,6 +7,7 @@ import SehatConsultation
 import SehatDomain
 import SehatMedication
 import SehatPersistence
+import SehatWidgetSupport
 import SwiftData
 
 /// Composition root: builds storage and the coordinators.
@@ -45,7 +46,7 @@ enum Startup {
                     consultation: ConsultationCoordinator(repository: consultationStore),
                     appointment: AppointmentCoordinator(repository: appointmentStore),
                     medication: MedicationCoordinator(
-                        repository: medicationStore,
+                        repository: await makeMedicationRepository(base: medicationStore),
                         scheduler: reminderScheduler
                     )
                 )
@@ -53,5 +54,22 @@ enum Startup {
         } catch {
             return .failed
         }
+    }
+
+    /// With the App Group available, every reminder change is published to the
+    /// widget, and the snapshot is rebuilt now (heals drift). Without it the
+    /// app works unchanged and the widget asks the user to open the app.
+    private static func makeMedicationRepository(
+        base: MedicationStore
+    ) async -> any MedicationReminderRepository {
+        guard let directory = SharedContainer.snapshotDirectory() else { return base }
+
+        let publisher = ReminderSnapshotPublisher(
+            repository: base,
+            store: FileReminderSnapshotStore(directory: directory),
+            reloader: WidgetCenterReloader()
+        )
+        _ = try? await publisher.publish()
+        return SnapshotPublishingRepository(base: base, publisher: publisher)
     }
 }
