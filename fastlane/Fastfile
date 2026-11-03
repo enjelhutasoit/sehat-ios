@@ -7,7 +7,7 @@ require "json"
 require "open3"
 
 tooling_lib = File.join(FastlaneCore::FastlaneFolder.path, "lib")
-%w[packages xcode_selector simulator_picker coverage_report].each do |name|
+%w[packages xcode_selector simulator_picker coverage_report markdown_links].each do |name|
   require File.join(tooling_lib, name)
 end
 
@@ -83,6 +83,14 @@ lane :tooling_tests do
     "-e", "ARGV.each { |file| require file }",
     *files
   )
+end
+
+desc "Check that relative links in README.md and docs/ point to existing files"
+lane :docs_check do
+  broken = MarkdownLinks.broken(repo_root)
+  UI.user_error!("Broken links:\n#{broken.join("\n")}") unless broken.empty?
+
+  UI.success("All relative links in README.md and docs/ resolve")
 end
 
 desc "swift test with coverage for every package (or one: package:SehatCore), then print coverage"
